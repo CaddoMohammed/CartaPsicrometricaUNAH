@@ -81,28 +81,29 @@ let A = [
 ];
 let B = [
 	document.getElementById("izxkjshjasdzzta"),	// 0 Contenedor de los acordiones
-	document.getElementById("vbcbcvbfregtrfs"),	// 1 Div para lineas guardadas
-	document.getElementById("yuiqweoqxcaqewt"),	// 2 Div para los puntos guardados
-	document.getElementById("hajzxbqaopqjhav")	// 3 Boton borrar todo
+	document.getElementById("vbcbcvbfregtrfs"),	// 1 Aside-Div para lineas guardadas
+	document.getElementById("yuiqweoqxcaqewt"),	// 2 Aside-Div para los puntos guardados
+	document.getElementById("hajzxbqaopqjhav"),	// 3 Boton borrar todo
+	document.getElementById("fdfxcaasfgxcxqk"),	// 4 Contenedor de lineas guardadas
+	document.getElementById("krtegujidfokjfh")	// 5 Contenedor puntos guardados
 ];
 let C = [
-	document.getElementById("fdfxcaasfgxcxqk"),	// 0
-	document.getElementById("yasgjhzxhjhaqhd"),	// 1
-	document.getElementById("hjbzakkzxjkaiaj"),	// 2
-	document.getElementById("jyuaiujszxccqfd"),	// 3
-	document.getElementById("masdjkzxcoqacjs"),	// 4
-	document.getElementById("eqweoiaskjznaqa"),	// 5
-	document.getElementById("wtyauizxjhghqqq"),	// 6
-	document.getElementById("wsjkzoopalzkqwa")	// 7
+	document.getElementById("yasgjhzxhjhaqhd"),	// 0 Div lineas de entalpias
+	document.getElementById("hjbzakkzxjkaiaj"),	// 1 Div lineas de humedad especifica
+	document.getElementById("jyuaiujszxccqfd"),	// 2 Div lineas de humedad relativa
+	document.getElementById("masdjkzxcoqacjs"),	// 3 Div lineas de temperatura de bulbo humedo
+	document.getElementById("eqweoiaskjznaqa"),	// 4 Div lineas de temperatura de bulbo seco
+	document.getElementById("wtyauizxjhghqqq"),	// 5 Div lineas de temperatura de rocio
+	document.getElementById("wsjkzoopalzkqwa")	// 6 Div lineas de volumen especifico
 ];
 let D = [
-	document.getElementById("tytfgcvsazxcsda"),	// 0
-	document.getElementById("ghexvkjkibmvvcx"),	// 1
-	document.getElementById("fbdcvasdfcxazxg"),	// 2
-	document.getElementById("ghwefgouidfgzxb"),	// 3
-	document.getElementById("yujasaxozxjhszx"),	// 4
-	document.getElementById("fgsdfasdzxcadax"),	// 5
-	document.getElementById("jaksjcuizxuimng")	// 6
+	document.getElementById("tytfgcvsazxcsda"),	// 0 Contenedor lineas de entalpias
+	document.getElementById("ghexvkjkibmvvcx"),	// 1 Contenedor lineas de humedad especifica
+	document.getElementById("fbdcvasdfcxazxg"),	// 2 Contenedor lineas de humedad relativa
+	document.getElementById("ghwefgouidfgzxb"),	// 3 Contenedor lineas de temperatura de bulbo humedo
+	document.getElementById("yujasaxozxjhszx"),	// 4 Contenedor lineas de temperatura de bulbo seco
+	document.getElementById("fgsdfasdzxcadax"),	// 5 Contenedor lineas de temperatura de rocio
+	document.getElementById("jaksjcuizxuimng")	// 6 Contenedor lineas de volumen especifico
 ];
 let E = document.getElementById("htyftrghdfx");	// 
 let F = document.getElementById("rtqweqwasqd");	// Contenedor grafico
@@ -174,11 +175,9 @@ function a1(){
 		A[1].className = "d-flex flex-column justify-content-start align-items-stretch";
 		A[2].className = "d-flex flex-column justify-content-start p-2";
 		A[1].style.height = "100%";
-		A[2].style.minHeight = "100%";
+		A[2].style.height = "100%";
 		A[1].style.width = "50vw";
 		A[2].style.width = "50vw";
-		A[1].style.removeProperty("min-height");
-		A[2].style.removeProperty("flex-grow");
 		A[2].style.removeProperty("min-width");
 		A[1].style.overflow = "auto";
 	}
@@ -186,18 +185,16 @@ function a1(){
 		if(window.innerWidth<(420+20+0.58*b)){
 			A[1].className = "d-flex flex-column justify-content-start align-items-stretch flex-grow-1";
 			A[2].className = "d-flex flex-column justify-content-start flex-grow-1 p-2";
-			A[1].style.minHeight = "50%";
-			A[2].style.minHeight = "50%";
+			A[1].style.height = "50%";
+			A[2].style.height = "50%";
 			A[1].style.width = "100%";
 			A[2].style.width = "100%";
-			A[1].style.removeProperty("overflow");
-			A[1].style.removeProperty("height");
 		}
 		else{
 			A[1].className = "d-flex flex-column justify-content-start align-items-stretch";
 			A[2].className = "d-flex flex-column justify-content-start p-2";
 			A[1].style.height = "100%";
-			A[2].style.minHeight = "100%";
+			A[2].style.height = "100%";
 			A[1].style.width = "420px";
 			if(0.35*b<420){
 				A[1].style.width = "35vw";
@@ -293,7 +290,7 @@ function b1(){
 		<span class="visually-hidden">Loading...</span>
 	</div>`;
 	F.appendChild(a);
-	fetch("https://cartapsicrometrica-a00-774000747273.us-central1.run.app/rreszdzxvffgsdfcxcasa",{
+	fetch(`https://cartapsicrometrica-a00-774000747273.us-central1.run.app/rreszdzxvffgsdfcxcasa`,{
 		method:"POST",
 		headers: {
 			"Content-Type":"application/json"
@@ -490,17 +487,14 @@ function b2(x){
 		doubleClickDelay:10
 	}
 	Plotly.newPlot(F,X,Y,Z);
-	b3();
-	if(localStorage.getItem("CaddoMohammed-PuntosCartaPsicrometrica")!==null){
-		a = localStorage.getItem("CaddoMohammed-PuntosCartaPsicrometrica")
-		a = JSON.parse(a);
-		d2(a);
+	if(T.H!=undefined){
+		b3();
+	}
+	if(T.J!==undefined){
+		d3(T.J);
 	}
 }
 function b3(){
-	if(T.H==undefined){
-		return;
-	}
 	for(let i=0;i<7;i++){
 		for(let j=0;j<T.H[i].length;j++){
 			b4(T.H[i][j],i);
@@ -522,7 +516,7 @@ function b4(x,y){
 		X = X.filter(b => b.name!==(x[3].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})+x[4]));
 		T.H[y] = T.H[y].filter(b => !b.includes(x[3]));
 		if(T.H[y].length===0){
-			C[y+1].classList.add("d-none");
+			C[y].classList.add("d-none");
 			D[y].classList.add("d-none");
 		}
 		localStorage.setItem("CaddoMohammed-CartaPsicrometrica",JSON.stringify(T));
@@ -536,11 +530,11 @@ function b4(x,y){
 	}
 	a.appendChild(c);
 	D[y].appendChild(a);
-	if(C[0].classList.contains("d-none")){
-		C[0].classList.remove("d-none");
+	if(B[4].classList.contains("d-none")){
+		B[4].classList.remove("d-none");
 	}
-	if(C[y+1].classList.contains("d-none")){
-		C[y+1].classList.remove("d-none");
+	if(C[y].classList.contains("d-none")){
+		C[y].classList.remove("d-none");
 	}
 	if(D[y].classList.contains("d-none")){
 		D[y].classList.remove("d-none");
@@ -561,8 +555,16 @@ function b5(){
 	T.H = [[],[],[],[],[],[],[]];
 	T.I = [];
 	T.J = new Object();
+	T.K = new Object();
+	T.L = [];
 	localStorage.setItem("CaddoMohammed-CartaPsicrometrica",JSON.stringify(T));
 	b2(T);
+	B[4].classList.add("d-none");
+	B[5].innerHTML = "";
+	for(let i=0;i<7;i++){
+		C[i].classList.add("d-none");
+		D[i].innerHTML = "";
+	}
 }
 function c1(z){
 	if(!G[1].classList.contains("show")){
@@ -692,7 +694,7 @@ function c4(){
 	G[4].disabled = true;
 	G[5].classList.remove("d-none");
 	G[6].innerHTML = "Cargando...";
-	fetch("https://cartapsicrometrica-a00-774000747273.us-central1.run.app/ttrgxdfvasdfhgfcvsxdf", {
+	fetch(`https://cartapsicrometrica-a00-774000747273.us-central1.run.app/ttrgxdfvasdfhgfcvsxdf`, {
 		method:"POST",
 		headers:{
 			"Content-Type":"application/json",
@@ -710,6 +712,7 @@ function c4(){
 			T.H = [[],[],[],[],[],[],[]];
 			T.I = [];
 			T.J = new Object;
+			T.K = new Object;
 		}
 		T.H[v[1]].push(v[0]);
 		T.I.push([v[1],v[0][3]]);
@@ -729,98 +732,166 @@ function c5(){
 	}
 }
 function d1(){
-	let a = {
-		A:Number(T.F),
-		B:T.E,
-		C:T.B[2][T.B[1].length-1],
-		D:T.I
-	}
-	fetch("https://cartapsicrometrica-a00-774000747273.us-central1.run.app/ppoasakjzxgqhgahzbanq", {
+	fetch(`https://cartapsicrometrica-a00-774000747273.us-central1.run.app/ppoasakjzxgqhgahzbanq`, {
 		method:"POST",
 		headers:{
 			"Content-Type":"application/json",
 		},
-		body: JSON.stringify(a)
+		body: JSON.stringify({A:T.F,B:T.E,C:T.B[2][T.B[2].length-1],D:T.I,E:true,F:T.K})
 	})
 	.then(u => u.json())
 	.then(v => {
-		localStorage.setItem("CaddoMohammed-PuntosCartaPsicrometrica",JSON.stringify(v));
-		d2(v);
+		d2(v[0]);
+		if(v.length>1){
+			T.L = v[1];
+		}
 	})
 	.catch(k => console.error(k));
 }
 function d2(v){
-	document.getElementById("krtegujidfokjfh").innerHTML = "";
-	for(let i=0;i<v.length;i++){
+	let a = 0;
+	for(let i in v){
+		a = a+1;
+		if(T.J[i]){
+			continue
+		}
+		T.J[i] = v[i]
+		T.K[i] = 1;
+		d3({[i]:v[i]});
+	}
+	Plotly.react(F,X,Y,Z);
+	localStorage.setItem("CaddoMohammed-CartaPsicrometrica",JSON.stringify(T));
+}
+function d3(v){
+	for(let i in v){
 		let a = document.createElement("div");
 		a.className = "accordion accordion-flush accordion-item";
 		a.id = `BotonPunto-${i}`;
-		a.innerHTML = 
-			`<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#Punto-${i}" aria-expanded="false" aria-controls="Punto-${i}">
-					Punto (${v[i][1][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})},${v[i][7][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})})
-				</button>
-			</h2>
-			<div id="Punto-${i}" class="accordion-collapse collapse ms-3 p-1" data-bs-parent="#krtegujidfokjfh">
-				<table class="table table-dark table-striped">
-					<tbody>
-						<tr class="table-dark">
-							<td class="table-dark">Temperatura de bulbo seco</td>
-							<td class="table-dark">${v[i][1][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})} ${v[i][1][1]}</td>
-						</tr>
-						<tr class="table-dark">
-							<td class="table-dark">Temperatura de bulbo húmedo</td>
-							<td class="table-dark">${v[i][2][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})} ${v[i][2][1]}</td>
-						</tr>
-						<tr class="table-dark">
-							<td class="table-dark">Temperatura de rocío</td>
-							<td class="table-dark">${v[i][3][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})} ${v[i][3][1]}</td>
-						</tr>
-						<tr class="table-dark">
-							<td class="table-dark">Presión del agua saturada</td>
-							<td class="table-dark">${v[i][4][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})} ${v[i][4][1]}</td>
-						</tr>
-						<tr class="table-dark">
-							<td class="table-dark">Presión del vapor de agua en el aire</td>
-							<td class="table-dark">${v[i][5][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})} ${v[i][5][1]}</td>
-						</tr>
-						<tr class="table-dark">
-							<td class="table-dark">Humedad específica del agua saturada</td>
-							<td class="table-dark">${v[i][6][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})} ${v[i][6][1]}</td>
-						</tr>
-						<tr class="table-dark">
-							<td class="table-dark">Humedad específica</td>
-							<td class="table-dark">${v[i][7][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})} ${v[i][7][1]}</td>
-						</tr>
-						<tr class="table-dark">
-							<td class="table-dark">Humedad relativa</td>
-							<td class="table-dark">${v[i][8][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})} ${v[i][8][1]}</td>
-						</tr>
-						<tr class="table-dark">
-							<td class="table-dark">Entalpía</td>
-							<td class="table-dark">${v[i][9][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})} ${v[i][9][1]}</td>
-						</tr>
-						<tr class="table-dark">
-							<td class="table-dark">Volumen específico</td>
-							<td class="table-dark">${v[i][10][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})} ${v[i][10][1]}</td>
-						</tr>
-					</tbody>
-				</table>
-				<!--div class="a1 a3 b1 c1 m1">
-					<button type="button" class="btn btn-danger" onclick="d3(${i})">Borrar punto <i class="bi bi-trash3"></i></button>
-				</div-->
-			</div>`;
-		X.push({ 
-			x: [v[i][1][0]],
-			y: [v[i][7][0]],
-			mode: 'markers',
-			type: 'scatter',
-			marker: {
-				size: 10,
-			},
-			name: `P<sub>${i+1}</sub>`
-		});
-		document.getElementById("krtegujidfokjfh").appendChild(a);
+		B[5].appendChild(a);
+		let b = document.createElement("h2");
+		b.className = "accordion-header";
+		b.innerHTML = 
+			`<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#Punto-${i}" aria-expanded="false" aria-controls="Punto-${i}">
+				${i}
+			</button>`;
+		a.appendChild(b);
+		let c = document.createElement("div");
+		c.id = `Punto-${i}`;
+		c.className = "accordion-collapse collapse ms-3 p-1";
+		c.setAttribute("data-bs-parent","#krtegujidfokjfh");
+		a.appendChild(c);
+		c.innerHTML =
+			`<table class="table table-dark table-striped">
+				<tbody>
+					<tr class="table-dark">
+						<td class="table-dark">Temperatura de bulbo seco <em>(t)</em></td>
+						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
+						<td class="table-dark" style="width:max-content;">${T.L[0]}</td>
+					</tr>
+					<tr class="table-dark">
+						<td class="table-dark">Temperatura de bulbo húmedo <em>(tbh)</em></td>
+						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][1].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
+						<td class="table-dark" style="width:max-content;">${T.L[0]}</td>
+					</tr>
+					<tr class="table-dark">
+						<td class="table-dark">Temperatura de rocío <em>(dp)</em></td>
+						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][2].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
+						<td class="table-dark" style="width:max-content;">${T.L[0]}</td>
+					<tr class="table-dark">
+						<td class="table-dark">Presión del agua saturada</td>
+						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][3].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
+						<td class="table-dark" style="width:max-content;">${T.L[1]}</td>
+					</tr>
+					<tr class="table-dark">
+						<td class="table-dark">Presión del vapor de agua en el aire</td>
+						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][4].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
+						<td class="table-dark" style="width:max-content;">${T.L[1]}</td>
+					</tr>
+					<tr class="table-dark">
+						<td class="table-dark">Humedad específica del agua saturada</td>
+						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][5].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
+						<td class="table-dark" style="width:max-content;">${T.L[2]}</td>
+					</tr>
+					<tr class="table-dark">
+						<td class="table-dark">Humedad específica <em>(W)</em></td>
+						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][6].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
+						<td class="table-dark" style="width:max-content;">${T.L[2]}</td>
+					</tr>
+					<tr class="table-dark">
+						<td class="table-dark">Humedad relativa</td>
+						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][7].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
+						<td class="table-dark" style="width:max-content;">${T.L[3]}</td>
+					</tr>
+					<tr class="table-dark">
+						<td class="table-dark">Entalpía <em>(h)</em></td>
+						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][8].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
+						<td class="table-dark" style="width:max-content;">${T.L[4]}</td>
+					</tr>
+					<tr class="table-dark">
+						<td class="table-dark">Volumen específico <em>(v)</em></td>
+						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][9].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
+						<td class="table-dark" style="width:max-content;">${T.L[5]}</td>
+					</tr>
+				</tbody>
+			</table>`;
+		let d = document.createElement("div");
+		d.className = "d-flex justify-content-between m-2 me-4 align-items-center";
+		c.appendChild(d);
+		let e = document.createElement("p");
+		e.className = "m-2";
+		if(T.K[i]===1){
+			e.innerHTML = `<i class="bi bi-eye-slash-fill"></i>`;
+			X.push({
+				x:[v[i][0]],
+				y:[v[i][6]],
+				mode:"markers",
+				type:"scatter",
+				marker:{
+					size:10,
+				},
+				name:i
+			});
+			Plotly.react(F,X,Y,Z);
+		} else {
+			e.innerHTML = `<i class="bi bi-eye-fill"></i>`;
+		}
+		e.onclick = function(){
+			if(e.innerHTML==`<i class="bi bi-eye-slash-fill"></i>`){
+				e.innerHTML = `<i class="bi bi-eye-fill"></i>`;
+				X = X.filter(g => g.name!==i);
+				T.K[i] = 0;
+				Plotly.react(F,X,Y,Z);
+				localStorage.setItem("CaddoMohammed-CartaPsicrometrica",JSON.stringify(T));
+			} else {
+				e.innerHTML = `<i class="bi bi-eye-slash-fill"></i>`;
+				T.K[i] = 1;
+				X.push({
+					x:[v[i][0]],
+					y:[v[i][6]],
+					mode:"markers",
+					type:"scatter",
+					marker:{
+						size:10,
+					},
+					name:i
+				});
+				Plotly.react(F,X,Y,Z);
+				localStorage.setItem("CaddoMohammed-CartaPsicrometrica",JSON.stringify(T));
+			}
+		}
+		d.appendChild(e);
+		let f = document.createElement("button");
+		f.className = "btn btn-danger";
+		f.setAttribute("type","button");
+		f.innerHTML = `Eliminar punto <i class="bi bi-trash3-fill"></i>`;
+		f.onclick = function(){
+			a.remove();
+			X = X.filter(g => g.name!==i);
+			delete T.J[i];
+			delete T.K[i];
+			localStorage.setItem("CaddoMohammed-CartaPsicrometrica",JSON.stringify(T));
+			Plotly.react(F,X,Y,Z);
+		}
+		d.appendChild(f);
 	}
-	Plotly.react(F,X,Y,Z);
 }
