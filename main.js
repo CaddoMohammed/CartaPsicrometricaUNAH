@@ -301,6 +301,7 @@ function b1(){
 	.then(x => {
 		F.innerHTML = "";
 		T = x;
+		b5();
 		localStorage.setItem("CaddoMohammed-CartaPsicrometrica",JSON.stringify(T));
 		b2(x);
 	})
@@ -320,16 +321,14 @@ function b2(x){
 			e = [0,50];
 			f = 50;
 			g = [0,30];
-		}
-		else{
+		} else {
 			d = [-60,90];
 			e = [-60,90];
 			f = 100;
 			g = [0,100];
 		}
 		h = "Carta Psicrométrica en el sistema internacional";
-	}
-	else{
+	} else {
 		a = "ft<sup>3</sup>/lb<sub>da</sub>";
 		b = "Btu/lb<sub>da</sub>";
 		c = "°F";
@@ -338,8 +337,7 @@ function b2(x){
 			e = [32,120];
 			f = 0.05;
 			g = [0,0.03];
-		}
-		else{
+		} else {
 			d = [-80,200];
 			e = [-50,120];
 			f = 0.1;
@@ -515,6 +513,7 @@ function b4(x,y){
 		a.remove();
 		X = X.filter(b => b.name!==(x[3].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})+x[4]));
 		T.H[y] = T.H[y].filter(b => !b.includes(x[3]));
+		T.I = T.I.filter(b => !b.includes(x[3]));
 		if(T.H[y].length===0){
 			C[y].classList.add("d-none");
 			D[y].classList.add("d-none");
@@ -732,19 +731,27 @@ function c5(){
 	}
 }
 function d1(){
+	let a = false;
+	if(T.L==undefined){
+		a = true;
+	} else {
+		if(T.L.length===0){
+			a = true;
+		}
+	}
 	fetch(`https://cartapsicrometrica-a00-774000747273.us-central1.run.app/ppoasakjzxgqhgahzbanq`, {
 		method:"POST",
 		headers:{
 			"Content-Type":"application/json",
 		},
-		body: JSON.stringify({A:T.F,B:T.E,C:T.B[2][T.B[2].length-1],D:T.I,E:true,F:T.K})
+		body: JSON.stringify({A:T.F,B:T.E,C:T.B[2][T.B[2].length-1],D:T.I,E:a,F:T.K})
 	})
 	.then(u => u.json())
 	.then(v => {
-		d2(v[0]);
 		if(v.length>1){
 			T.L = v[1];
 		}
+		d2(v[0]);
 	})
 	.catch(k => console.error(k));
 }
