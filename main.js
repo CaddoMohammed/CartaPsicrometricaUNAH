@@ -479,7 +479,7 @@ function d3(v){
 		let c = document.createElement("div");
 		c.id = `Punto-${i}`;
 		c.className = "accordion-collapse collapse ms-3 p-1";
-		c.setAttribute("data-bs-parent","#krtegujidfokjfh");
+		c.setAttribute("data-bs-parent","#puntos-guardados");
 		a.appendChild(c);
 		let d = "bi-eye-slash-fill";
 		if(T.B[i]===false){
