@@ -491,12 +491,12 @@ function d3(v){
 					<tr class="table-dark">
 						<td class="table-dark">Temperatura de bulbo seco <em>(t)</em></td>
 						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][0].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
-						<td class="table-dark" style="width:max-content;">${T["Unidades"][4]}</td>
+						<td class="table-dark" style="width:max-content;">${T["Unidades"][3]}</td>
 					</tr>
 					<tr class="table-dark">
 						<td class="table-dark">Temperatura de bulbo húmedo <em>(tbh)</em></td>
 						<td class="table-dark" style="width:max-content; text-align:right;">${v[i][1].toLocaleString('en-US',{style:"decimal",maximunFractionDigits:4})}</td>
-						<td class="table-dark" style="width:max-content;">${T["Unidades"][2]}</td>
+						<td class="table-dark" style="width:max-content;">${T["Unidades"][4]}</td>
 					</tr>
 					<tr class="table-dark">
 						<td class="table-dark">Temperatura de rocío <em>(dp)</em></td>
